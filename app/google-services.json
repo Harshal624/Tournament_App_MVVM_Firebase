@@ -1,0 +1,122 @@
+{
+  "project_info": {
+    "project_number": "991632066607",
+    "firebase_url": "https://tournamentapp-5ec64.firebaseio.com",
+    "project_id": "tournamentapp-5ec64",
+    "storage_bucket": "tournamentapp-5ec64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991632066607:android:dcfe43ae41d07c638c5eda",
+        "android_client_info": {
+          "package_name": "ace.infosolutions.navcomponent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991632066607-0qlt43jf0qh4u4hkcg1pkg9ddr7s64ec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ace.infosolutions.navcomponent",
+            "certificate_hash": "33adb43727c2886ec62d7f23b29cc8bd17389332"
+          }
+        },
+        {
+          "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIHsb6r6j6hqe5y9s9Qthk9Ls9S3weLBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991632066607:android:da6542a99c18417e8c5eda",
+        "android_client_info": {
+          "package_name": "ace.infosolutions.tournamentapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991632066607-v6m9i39p9007fpf97rof36ogu6v6hveh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ace.infosolutions.tournamentapp",
+            "certificate_hash": "33adb43727c2886ec62d7f23b29cc8bd17389332"
+          }
+        },
+        {
+          "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIHsb6r6j6hqe5y9s9Qthk9Ls9S3weLBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:991632066607:android:8ca602e385d331688c5eda",
+        "android_client_info": {
+          "package_name": "ace.infosolutions.tournyapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "991632066607-ii7kqm942cirhn103p5npmt67e6b30tq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ace.infosolutions.tournyapp",
+            "certificate_hash": "33adb43727c2886ec62d7f23b29cc8bd17389332"
+          }
+        },
+        {
+          "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIHsb6r6j6hqe5y9s9Qthk9Ls9S3weLBM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "991632066607-7nlse8vpsefb2q0m8lcqh7l4aek4c7r5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
