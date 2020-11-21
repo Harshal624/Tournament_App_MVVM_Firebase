@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_10sdp"
+    app:cardElevation="@dimen/_5sdp"
+    android:layout_marginStart="@dimen/_10sdp"
+    android:layout_marginTop="@dimen/_10sdp"
+    app:cardBackgroundColor="@color/mainbackground"
+    android:layout_height="@dimen/_80sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <ImageView
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="match_parent"
+            android:src="@drawable/teamdissample"
+            android:padding="@dimen/_4sdp"
+            android:id="@+id/team_pic"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/team_pic"
+            android:text="TeamDis"
+            android:textColor="@color/white100"
+            android:textSize="@dimen/_20sdp"
+            android:padding="@dimen/_8sdp"
+            android:fontFamily="@font/maldinibold"
+            android:id="@+id/team_title"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/team_pic"
+            android:id="@+id/team_type"
+            android:layout_centerInParent="true"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="Squad"
+            android:textSize="@dimen/_10sdp"
+            android:paddingStart="@dimen/_10sdp"
+            />
+
+
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>

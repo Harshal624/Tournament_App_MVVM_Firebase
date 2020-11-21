@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Home"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:id="@+id/homeFragment"
+        />
+    <item
+    android:title="Participated"
+    android:icon="@drawable/ic_gamepad_black_24dp"
+    android:id="@+id/participateFragment"
+    />
+    <item
+        android:title="Host"
+        android:icon="@drawable/ic_add_box_black_24dp"
+        android:id="@+id/hostFragment"
+        />
+    <item
+        android:title="Profile"
+        android:icon="@drawable/ic_profile_circle_black_24dp"
+        android:id="@+id/profileFragment"/>
+</menu>
