@@ -1,39 +1,30 @@
 package ace.infosolutions.tournyapp.viewmodel;
 
+import android.app.Application;
+import android.graphics.Bitmap;
 import android.net.Uri;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import ace.infosolutions.tournyapp.repository.ProfileRepo;
 
-public class ProfileViewModel extends ViewModel {
+public class ProfileViewModel extends AndroidViewModel {
+    public LiveData<Bitmap> profile_url;
+    public LiveData<Boolean> profile_upload_status;
     ProfileRepo repo;
-    private MutableLiveData<String> profile_url;
-    private MutableLiveData<Boolean> profile_upload_status;
 
+    public ProfileViewModel(@NonNull Application application) {
+        super(application);
+        repo = new ProfileRepo();
+    }
 
-    public void initprofileUrl() {
-        if (profile_url != null)
-            return;
-        repo = ProfileRepo.getInstance();
+    public void getProfileUrl() {
         profile_url = repo.getProfileUrl();
     }
 
-
-    public void inituploadprofile(Uri filePath) {
-        if (profile_upload_status != null)
-            return;
-        repo = ProfileRepo.getInstance();
+    public void getProfileUploadStatus(Uri filePath) {
         profile_upload_status = repo.uploadProfile(filePath);
-    }
-
-    public LiveData<String> getProfileurl() {
-        return profile_url;
-    }
-
-    public LiveData<Boolean> getUploadStatus() {
-        return profile_upload_status;
     }
 }

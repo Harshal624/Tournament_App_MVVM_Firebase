@@ -20,7 +20,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
 
@@ -84,16 +83,11 @@ public class ProfileFragment extends Fragment {
     }
 
     public void loadProfilePic() {
-        viewModel.initprofileUrl();
-        viewModel.getProfileurl().observe(getViewLifecycleOwner(), new Observer<String>() {
+        viewModel.getProfileUrl();
+        viewModel.profile_url.observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
             @Override
-            public void onChanged(String profile_url) {
-                try {
-                    Picasso.get().load(profile_url).into(binding.circleImageView);
-                } catch (IllegalArgumentException e) {
-                    //load dummy photo here
-                    Toast.makeText(getContext(), "Failed to load the profile picture, please upload another one", Toast.LENGTH_SHORT).show();
-                }
+            public void onChanged(Bitmap bitmap) {
+                binding.circleImageView.setImageBitmap(bitmap);
             }
         });
     }
@@ -105,52 +99,9 @@ public class ProfileFragment extends Fragment {
                         = new ProgressDialog(getContext());
                 progressDialog.setTitle("Uploading...");
                 progressDialog.show();
-              /*  db.collection("PROFILE").document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                        if (task.isSuccessful()) {
-                            final String username = task.getResult().getString("username");
-                            StorageReference ref = storageReference.child("profilepics/" + username);
-                            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                    long kbytes = taskSnapshot.getTotalByteCount() / 1024;
-                                    Toast.makeText(getContext(), kbytes + "kb uploaded", Toast.LENGTH_SHORT).show();
-                                    progressDialog.dismiss();
-                                    storageReference.child("profilepics/" + username).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-                                        @Override
-                                        public void onSuccess(Uri uri) {
-                                            db.collection("PROFILE").document(auth.getUid()).update("profile_url", uri.toString());
-                                            binding.editprofilepic.setVisibility(View.VISIBLE);
-                                            binding.uploadprofilepic.setVisibility(View.GONE);
-                                        }
-                                    });
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    progressDialog.dismiss();
-                                }
-                            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                                @Override
-                                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                                    double progress
-                                            = (100.0
-                                            * taskSnapshot.getBytesTransferred()
-                                            / taskSnapshot.getTotalByteCount());
-                                    progressDialog.setMessage(
-                                            "Uploaded "
-                                                    + (int) progress + "%");
-                                }
-                            });
-                        } else {
-                            progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Failed to upload the image!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
-                viewModel.inituploadprofile(filePath);
-                viewModel.getUploadStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+
+                viewModel.getProfileUploadStatus(filePath);
+                viewModel.profile_upload_status.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
                     @Override
                     public void onChanged(Boolean status) {
                         if (status) {
@@ -162,6 +113,7 @@ public class ProfileFragment extends Fragment {
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Failed to upload the profile pic", Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
 
