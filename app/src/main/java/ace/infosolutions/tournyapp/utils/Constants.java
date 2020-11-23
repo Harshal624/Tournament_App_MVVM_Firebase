@@ -9,5 +9,6 @@ public interface Constants {
 
     //Document field names:
     String username = "username";
+    String profile_url = "profile_url";
 
 }

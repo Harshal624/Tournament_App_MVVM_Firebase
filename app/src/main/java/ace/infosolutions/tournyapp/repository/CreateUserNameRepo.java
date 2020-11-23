@@ -1,23 +1,18 @@
 package ace.infosolutions.tournyapp.repository;
 
 import androidx.annotation.NonNull;
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.WriteBatch;
 
-import ace.infosolutions.tournyapp.model.User;
 import ace.infosolutions.tournyapp.model.Username;
 
 import static ace.infosolutions.tournyapp.utils.Constants.PROFILE;
@@ -50,7 +45,7 @@ public class CreateUserNameRepo {
         return mutableLiveData;
     }
 
-    public LiveData<Boolean> checkIfUsernameIsUpdated(String uName) {
+    public MutableLiveData<Boolean> checkIfUsernameIsUpdated(String uName) {
         Username uNamePOJO = new Username(true);
         WriteBatch batch = db.batch();
         DocumentReference profileRef = db.collection(PROFILE).document(auth.getUid());

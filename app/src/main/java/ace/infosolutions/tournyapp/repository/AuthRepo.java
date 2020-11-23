@@ -42,7 +42,7 @@ public class AuthRepo {
                                         String uname = task.getResult().getString(username);
                                         //username is empty
                                         if (uname.equals("")) {
-                                            User user = new User(uid, name, email, false, null);
+                                            User user = new User(uid, name, email, false, "", "");
                                             authenticatedUserMutableLiveData.setValue(user);
                                         }
                                         //username already exists
@@ -53,7 +53,7 @@ public class AuthRepo {
                                     }
                                     //new account
                                     else {
-                                        User user = new User(uid, name, email, false, "");
+                                        User user = new User(uid, name, email, false, "", "");
                                         db.collection(PROFILE).document(uid).set(user);
                                         authenticatedUserMutableLiveData.setValue(user);
                                     }

@@ -57,10 +57,14 @@ public class SplashRepo {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         String uName = task.getResult().getString(username);
-                        if (uName.equals("") || uName.equals(null)) {
-                            unameexists.setValue(false);
-                        } else {
-                            unameexists.setValue(true);
+                        try {
+                            if (uName.equals("") || uName.equals(null)) {
+                                unameexists.setValue(false);
+                            } else {
+                                unameexists.setValue(true);
+                            }
+                        } catch (Exception e) {
+                            firebaseAuth.signOut();
                         }
                     } else {
                         //failed

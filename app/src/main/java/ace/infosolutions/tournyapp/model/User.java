@@ -8,6 +8,7 @@ public class User {
     @SuppressWarnings("WeakerAccess")
     public String email;
     public String username;
+    public String profile_url;
     @Exclude
     public boolean isAuthenticated;
     @Exclude
@@ -17,12 +18,13 @@ public class User {
 
     public User(){}
 
-    public User(String uid, String name, String email,boolean unameexists,String username) {
+    public User(String uid, String name, String email, boolean unameexists, String username, String profile_url) {
         this.uid = uid;
         this.name = name;
         this.email = email;
         this.unameexists = unameexists;
         this.username = username;
+        this.profile_url = profile_url;
     }
 
     public User(String uid, String name, String email, boolean unameexists) {

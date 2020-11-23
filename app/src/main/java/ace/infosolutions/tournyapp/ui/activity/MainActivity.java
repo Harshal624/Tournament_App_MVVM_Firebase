@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
 import ace.infosolutions.tournyapp.R;
 import ace.infosolutions.tournyapp.databinding.ActivityMainBinding;
 
@@ -25,5 +27,7 @@ public class MainActivity extends AppCompatActivity {
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         NavController controller = navHostFragment.getNavController();
         NavigationUI.setupWithNavController(bottomNavigationView, controller);
+
     }
+
 }
