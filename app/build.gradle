@@ -22,7 +22,7 @@ android {
         }
     }
 
-    buildTypes.each{
+    buildTypes.each {
         it.buildConfigField 'String', 'WEB_CLIENT_ID', web_client_id
     }
 

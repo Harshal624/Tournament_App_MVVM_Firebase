@@ -19,17 +19,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
@@ -44,9 +34,6 @@ public class ProfileFragment extends Fragment {
     private final int PICK_IMAGE_REQUEST = 231;
     FragmentProfileBinding binding;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-    FirebaseStorage storage;
-    StorageReference storageReference;
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
     Bitmap bitmap;
     Uri filePath;
     ProfileViewModel viewModel;
@@ -57,10 +44,7 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         setUpFragmentToolbar(binding.getRoot());
-        storage = FirebaseStorage.getInstance();
-        storageReference = storage.getReference();
         initViewModel();
-        loadProfilePic();
         return binding.getRoot();
     }
 
@@ -72,6 +56,7 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        loadProfilePic();
         binding.signout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,7 +105,7 @@ public class ProfileFragment extends Fragment {
                         = new ProgressDialog(getContext());
                 progressDialog.setTitle("Uploading...");
                 progressDialog.show();
-                db.collection("PROFILE").document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+              /*  db.collection("PROFILE").document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                         if (task.isSuccessful()) {
@@ -161,6 +146,21 @@ public class ProfileFragment extends Fragment {
                         } else {
                             progressDialog.dismiss();
                             Toast.makeText(getContext(), "Failed to upload the image!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });*/
+                viewModel.inituploadprofile(filePath);
+                viewModel.getUploadStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+                    @Override
+                    public void onChanged(Boolean status) {
+                        if (status) {
+                            binding.editprofilepic.setVisibility(View.VISIBLE);
+                            binding.uploadprofilepic.setVisibility(View.GONE);
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "Successfully uploaded", Toast.LENGTH_SHORT).show();
+                        } else {
+                            progressDialog.dismiss();
+                            Toast.makeText(getContext(), "Failed to upload the profile pic", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -227,14 +227,13 @@ public class ProfileFragment extends Fragment {
             binding.editprofilepic.setVisibility(View.GONE);
             binding.uploadprofilepic.setVisibility(View.VISIBLE);
             try {
-                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), filePath);
+                bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), filePath);
                 binding.circleImageView.setImageBitmap(bitmap);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
-
 
 }
 

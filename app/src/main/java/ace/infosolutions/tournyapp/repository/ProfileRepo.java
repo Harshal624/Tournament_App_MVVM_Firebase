@@ -1,21 +1,28 @@
 package ace.infosolutions.tournyapp.repository;
 
+import android.net.Uri;
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.MutableLiveData;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import ace.infosolutions.tournyapp.utils.Constants;
 
 import static ace.infosolutions.tournyapp.utils.Constants.PROFILE;
 
 public class ProfileRepo {
+    private static final String TAG = "ProfileRepo";
     private static volatile ProfileRepo instance;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     MutableLiveData<String> mutableLiveData = new MutableLiveData<>();
@@ -49,7 +56,7 @@ public class ProfileRepo {
         return mutableLiveData;
     }
 
-   /* public MutableLiveData<Boolean> uploadProfile() {
+    public MutableLiveData<Boolean> uploadProfile(final Uri filePath) {
 
         db.collection(PROFILE).document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -60,24 +67,29 @@ public class ProfileRepo {
                     ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            long kbytes = taskSnapshot.getTotalByteCount() / 1024;
-                            Toast.makeText(getContext(), kbytes + "kb uploaded", Toast.LENGTH_SHORT).show();
-                            progressDialog.dismiss();
                             storageReference.child("profilepics/" + username).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                                 @Override
                                 public void onSuccess(Uri uri) {
                                     db.collection("PROFILE").document(auth.getUid()).update("profile_url", uri.toString());
-                                    binding.editprofilepic.setVisibility(View.VISIBLE);
-                                    binding.uploadprofilepic.setVisibility(View.GONE);
+                                    uploadMutableLiveData.setValue(true);
+                                    getProfileUrl();
                                 }
                             });
                         }
-                    })
+                    }).addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            uploadMutableLiveData.setValue(false);
+                            Log.e(TAG, "onFailure: ", e);
+                        }
+                    });
 
+                } else {
+                    uploadMutableLiveData.setValue(false);
                 }
             }
         });
 
         return uploadMutableLiveData;
-    }*/
+    }
 }
