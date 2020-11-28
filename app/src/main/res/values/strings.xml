@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">Tournament App</string>
     <string name="hello_blank_fragment">hello_blank_fragment</string>
+    <string name="full_name">Full Name:</string>
+    <string name="date_of_birth">Date Of Birth:</string>
+    <string name="location">Location:</string>
 
 </resources>

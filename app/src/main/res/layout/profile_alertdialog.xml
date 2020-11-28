@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/black"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/verminvibesfont"
+        android:gravity="center"
+        android:paddingTop="@dimen/_8sdp"
+        android:text="Edit username"
+        android:textColor="@color/white100" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/azure" />
+
+    <EditText
+        android:id="@+id/firstET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/tranparent"
+        android:gravity="center"
+        android:maxLength="15"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white100"
+        android:textColorHint="?android:textColorHint" />
+
+    <EditText
+        android:id="@+id/secondET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/tranparent"
+        android:gravity="center"
+        android:maxLength="15"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white100"
+        android:textColorHint="?android:textColorHint" />
+
+    <EditText
+        android:id="@+id/thirdET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/tranparent"
+        android:gravity="center"
+        android:maxLength="15"
+        android:padding="@dimen/_10sdp"
+        android:textColor="@color/white100"
+        android:textColorHint="?android:textColorHint" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/_10sdp"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/verminvibesfont"
+            android:gravity="center"
+            android:text="Cancel"
+            android:textColor="@color/white100" />
+
+        <TextView
+            android:id="@+id/confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="@font/verminvibesfont"
+            android:gravity="center"
+            android:text="Confirm"
+            android:textColor="@color/white100" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,16 +11,19 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import ace.infosolutions.tournyapp.R;
 import ace.infosolutions.tournyapp.databinding.ActivityMainBinding;
+import ace.infosolutions.tournyapp.viewmodel.ProfileViewModel;
 
 
 public class MainActivity extends AppCompatActivity {
     public ActivityMainBinding binding;
+    ProfileViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
 
         //Bottomnav
         BottomNavigationView bottomNavigationView = binding.bottomnavigationview;

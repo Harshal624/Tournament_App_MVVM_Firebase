@@ -14,5 +14,157 @@
        app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent" />
 
+   <androidx.constraintlayout.widget.ConstraintLayout
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       android:orientation="vertical"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHeight_default="percent"
+       app:layout_constraintHeight_percent="0.5"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       app:layout_constraintVertical_bias="0.6">
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:background="@color/maincolor"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_default="percent"
+          app:layout_constraintHeight_percent="0.5"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintWidth_default="percent"
+          app:layout_constraintWidth_percent="0.5">
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/pubgmobile"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginStart="@dimen/_3sdp"
+             android:layout_marginEnd="@dimen/_6sdp"
+             android:layout_marginBottom="@dimen/_3sdp"
+             app:cardCornerRadius="@dimen/_8sdp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHeight_default="percent"
+             app:layout_constraintHeight_percent="0.5"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintWidth_default="percent"
+             app:layout_constraintWidth_percent="0.5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/pubgmobilepic" />
+         </androidx.cardview.widget.CardView>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintHeight_default="percent"
+          app:layout_constraintHeight_percent="0.5"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintWidth_default="percent"
+          app:layout_constraintWidth_percent="0.5">
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/freefire"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginStart="@dimen/_6sdp"
+             android:layout_marginEnd="@dimen/_3sdp"
+             android:layout_marginBottom="@dimen/_3sdp"
+             app:cardCornerRadius="@dimen/_8sdp"
+             app:layout_constraintHeight_default="percent"
+             app:layout_constraintHeight_percent="0.5"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintTop_toTopOf="parent"
+             app:layout_constraintWidth_default="percent"
+             app:layout_constraintWidth_percent="0.5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/freefirepic" />
+         </androidx.cardview.widget.CardView>
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintHeight_default="percent"
+          app:layout_constraintHeight_percent="0.5"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintWidth_default="percent"
+          app:layout_constraintWidth_percent="0.5">
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/valorant"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginStart="@dimen/_6sdp"
+             android:layout_marginTop="@dimen/_3sdp"
+             android:layout_marginEnd="@dimen/_3sdp"
+             app:cardCornerRadius="@dimen/_8sdp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintHeight_default="percent"
+             app:layout_constraintHeight_percent="0.5"
+             app:layout_constraintStart_toStartOf="parent"
+             app:layout_constraintWidth_default="percent"
+             app:layout_constraintWidth_percent="0.5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/valorantpic" />
+         </androidx.cardview.widget.CardView>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHeight_default="percent"
+          app:layout_constraintHeight_percent="0.5"
+          app:layout_constraintWidth_default="percent"
+          app:layout_constraintWidth_percent="0.5">
+
+
+         <androidx.cardview.widget.CardView
+             android:id="@+id/codmobile"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_marginStart="@dimen/_3sdp"
+             android:layout_marginTop="@dimen/_3sdp"
+             android:layout_marginEnd="@dimen/_6sdp"
+             app:cardCornerRadius="@dimen/_8sdp"
+             app:layout_constraintBottom_toBottomOf="parent"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintHeight_default="percent"
+             app:layout_constraintHeight_percent="0.5"
+             app:layout_constraintWidth_default="percent"
+             app:layout_constraintWidth_percent="0.5">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.5"
+                android:scaleType="fitXY"
+                android:src="@drawable/codmobilepic" />
+         </androidx.cardview.widget.CardView>
+      </LinearLayout>
+
+
+   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

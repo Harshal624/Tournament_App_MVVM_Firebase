@@ -56,17 +56,38 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
-            android:layout_weight="1"
-            android:fontFamily="@font/maldinibold"
-            android:gravity="center"
-            android:padding="@dimen/_5sdp"
-            android:text="hArsh"
-            android:textColor="@color/white100"
-            android:textSize="@dimen/_25sdp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:fontFamily="@font/maldinibold"
+                android:padding="@dimen/_5sdp"
+                android:text="hArsh"
+                android:textColor="@color/white100"
+                android:textSize="@dimen/_25sdp" />
+
+            <ImageButton
+                android:id="@+id/edituname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:background="@color/tranparent"
+                android:src="@drawable/ic_edit_white"
+
+                />
+
+        </RelativeLayout>
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -83,15 +104,6 @@
                 android:text="+69 rep"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="@dimen/_10sdp" />
-
-            <ImageButton
-                android:id="@+id/edituname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="@dimen/_20sdp"
-                android:background="@color/tranparent"
-                android:src="@drawable/ic_edit_white" />
         </RelativeLayout>
 
         <View
@@ -114,7 +126,7 @@
                 android:fontFamily="@font/machinegunkfont"
                 android:gravity="start|center"
                 android:paddingStart="@dimen/_10sdp"
-                android:text="Full Name:"
+                android:text="@string/full_name"
                 android:textColor="@color/white100"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -124,7 +136,7 @@
                 app:layout_constraintWidth_percent="0.3" />
 
             <TextView
-                android:id="@+id/textView5"
+                android:id="@+id/full_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -152,7 +164,7 @@
                 android:fontFamily="@font/machinegunkfont"
                 android:gravity="start|center"
                 android:paddingStart="@dimen/_10sdp"
-                android:text="Date Of Birth:"
+                android:text="@string/date_of_birth"
                 android:textColor="@color/white100"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -162,7 +174,7 @@
                 app:layout_constraintWidth_percent="0.3" />
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/dob"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -191,7 +203,7 @@
                 android:fontFamily="@font/machinegunkfont"
                 android:gravity="start|center"
                 android:paddingStart="@dimen/_10sdp"
-                android:text="Location:"
+                android:text="@string/location"
                 android:textColor="@color/white100"
                 android:textSize="@dimen/_15sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -201,7 +213,7 @@
                 app:layout_constraintWidth_percent="0.3" />
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -216,6 +228,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageButton
+                android:id="@+id/editpersprofile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_20sdp"
@@ -370,6 +383,7 @@
                     android:textSize="@dimen/_20sdp" />
 
                 <TextView
+                    android:id="@+id/freefire_id"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
@@ -421,6 +435,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="hArsh#2421"
+                    android:id="@+id/valorant_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -468,6 +483,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="hArsh#4221"
+                    android:id="@+id/codmobile_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -515,6 +531,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="ElCanCer"
+                    android:id="@+id/pubg_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -602,6 +619,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="Harshal Pudale"
+                    android:id="@+id/twitter_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -649,6 +667,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="hArsh#2321"
+                    android:id="@+id/discord_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -696,6 +715,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="Harshal Pudale"
+                    android:id="@+id/facebook_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -743,6 +763,7 @@
                     android:layout_height="@dimen/_15sdp"
                     android:gravity="start|bottom"
                     android:text="8767465443"
+                    android:id="@+id/whatsapp_id"
                     android:textColor="@color/azure"
                     android:textSize="@dimen/_10sdp" />
             </LinearLayout>
@@ -762,6 +783,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Settings"
+            android:id="@+id/settings"
             android:gravity="start|center"
             android:layout_marginStart="@dimen/_10sdp"
             android:layout_marginEnd="@dimen/_10sdp"

@@ -14,5 +14,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="TabbedTextAppearance" parent="Base.Widget.Design.TabLayout">
+        <item name="android:textSize">@dimen/_10sdp</item>
+        <item name="android:fontFamily">@font/verminvibesfont</item>
+    </style>
+
 
 </resources>

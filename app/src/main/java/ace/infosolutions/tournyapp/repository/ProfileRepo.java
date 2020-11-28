@@ -1,7 +1,5 @@
 package ace.infosolutions.tournyapp.repository;
 
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 
@@ -18,51 +16,64 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
-import ace.infosolutions.tournyapp.utils.Constants;
+import ace.infosolutions.tournyapp.model.ProfileModel;
 
 import static ace.infosolutions.tournyapp.utils.Constants.PROFILE;
 
 public class ProfileRepo {
     private static final String TAG = "ProfileRepo";
+    private static ProfileRepo instance;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
-    MutableLiveData<Bitmap> mutableLiveData = new MutableLiveData<>();
-    MutableLiveData<Boolean> uploadMutableLiveData = new MutableLiveData<>();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageReference = storage.getReference();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
 
-    public MutableLiveData<Bitmap> getProfileUrl() {
-        db.collection(PROFILE).document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    String profile_url = task.getResult().getString(Constants.profile_url);
-                    Picasso.get().load(profile_url).into(new Target() {
-                        @Override
-                        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                            mutableLiveData.setValue(bitmap);
-                        }
-
-                        @Override
-                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
-                            Log.e(TAG, "onBitmapFailed: ", e);
-                        }
-
-                        @Override
-                        public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                        }
-                    });
-                }
-            }
-        });
-        return mutableLiveData;
+    public static ProfileRepo getInstance() {
+        if (instance == null)
+            instance = new ProfileRepo();
+        return instance;
     }
 
-    public MutableLiveData<Boolean> uploadProfile(final Uri filePath) {
+    public MutableLiveData<ProfileModel> getProfileData() {
+
+        final MutableLiveData<ProfileModel> profileModelMutableLiveData = new MutableLiveData<>();
+        Log.e(TAG, "getProfileData: ");
+        db.collection(PROFILE).document(auth.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot snapshot) {
+                final ProfileModel model = snapshot.toObject(ProfileModel.class);
+                model.setSuccess(true);
+                Log.e(TAG, "ProfileURL: " + model.getProfile_url());
+
+                /*Glide.with(this).asBitmap().into(new CustomTarget<Bitmap>() {
+                    @Override
+                    public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+
+                    }
+
+                    @Override
+                    public void onLoadCleared(@Nullable Drawable placeholder) {
+
+                    }
+                });*/
+                profileModelMutableLiveData.setValue(model);
+            }
+        }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                ProfileModel model = new ProfileModel();
+                model.setSuccess(false);
+                profileModelMutableLiveData.setValue(model);
+            }
+        });
+        return profileModelMutableLiveData;
+    }
+
+
+    public MutableLiveData<Boolean> uploadProfilePic(Uri filePath) {
+        final MutableLiveData<Boolean> mutableLiveData = new MutableLiveData<>();
+
         StorageReference ref = storageReference.child("profilepics/" + auth.getUid());
         ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -71,19 +82,35 @@ public class ProfileRepo {
                     @Override
                     public void onSuccess(Uri uri) {
                         db.collection("PROFILE").document(auth.getUid()).update("profile_url", uri.toString());
-                        uploadMutableLiveData.setValue(true);
-                        getProfileUrl();
+                        mutableLiveData.setValue(true);
                     }
                 });
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                uploadMutableLiveData.setValue(false);
+                mutableLiveData.setValue(false);
                 Log.e(TAG, "onFailure: ", e);
             }
         });
 
-        return uploadMutableLiveData;
+        return mutableLiveData;
+
+    }
+
+    public MutableLiveData<String> getProfileURL() {
+        Log.d(TAG, "getProfileURL: ");
+        final MutableLiveData<String> getProfileURLMLData = new MutableLiveData<>();
+
+        db.collection(PROFILE).document(auth.getUid()).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    String prof_url = task.getResult().getString("profile_url");
+                    getProfileURLMLData.setValue(prof_url);
+                }
+            }
+        });
+        return getProfileURLMLData;
     }
 }

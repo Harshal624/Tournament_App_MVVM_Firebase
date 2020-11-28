@@ -6,23 +6,41 @@
     app:startDestination="@id/homeFragment">
 
     <fragment
+        android:id="@+id/profileFragment"
+        android:name="ace.infosolutions.tournyapp.ui.fragment.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="ace.infosolutions.tournyapp.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
         android:id="@+id/homeFragment"
         android:name="ace.infosolutions.tournyapp.ui.fragment.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
-    <fragment
-        android:id="@+id/hostFragment"
-        android:name="ace.infosolutions.tournyapp.ui.fragment.HostFragment"
-        android:label="fragment_host"
-        tools:layout="@layout/fragment_host" />
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_homeFragment_to_tournamentMainFragment"
+            app:destination="@id/tournamentMainFragment" />
+    </fragment>
     <fragment
         android:id="@+id/participateFragment"
         android:name="ace.infosolutions.tournyapp.ui.fragment.ParticipateFragment"
         android:label="fragment_participate"
         tools:layout="@layout/fragment_participate" />
     <fragment
-        android:id="@+id/profileFragment"
-        android:name="ace.infosolutions.tournyapp.ui.fragment.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:id="@+id/hostFragment"
+        android:name="ace.infosolutions.tournyapp.ui.fragment.HostFragment"
+        android:label="fragment_host"
+        tools:layout="@layout/fragment_host" />
+    <fragment
+        android:id="@+id/tournamentMainFragment"
+        android:name="ace.infosolutions.tournyapp.ui.fragment.FreefireMainFragment"
+        android:label="fragment_tournament_main"
+        tools:layout="@layout/fragment_freefiremain" />
 </navigation>
