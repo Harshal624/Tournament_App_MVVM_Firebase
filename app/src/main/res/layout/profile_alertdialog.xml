@@ -32,27 +32,6 @@
         android:textColor="@color/white100"
         android:textColorHint="?android:textColorHint" />
 
-    <EditText
-        android:id="@+id/secondET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/tranparent"
-        android:gravity="center"
-        android:maxLength="15"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/white100"
-        android:textColorHint="?android:textColorHint" />
-
-    <EditText
-        android:id="@+id/thirdET"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/tranparent"
-        android:gravity="center"
-        android:maxLength="15"
-        android:padding="@dimen/_10sdp"
-        android:textColor="@color/white100"
-        android:textColorHint="?android:textColorHint" />
 
 
     <LinearLayout

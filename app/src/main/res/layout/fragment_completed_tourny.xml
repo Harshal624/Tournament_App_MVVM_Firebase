@@ -3,13 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/maincolor"
     tools:context=".ui.fragment.CompletedTournyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <com.airbnb.lottie.LottieAnimationView
+        android:layout_width="@dimen/_100sdp"
+        android:layout_height="@dimen/_100sdp"
+        android:layout_gravity="center"
+        app:lottie_autoPlay="true"
+        app:lottie_rawRes="@raw/emptyanimation" />
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:gravity="center"
-        android:text="Completed tournaments" />
+        android:layout_marginTop="@dimen/_100sdp"
+        android:fontFamily="@font/roboto"
+        android:text="No tournaments available"
+        android:textColor="@color/azure"
+        android:textSize="@dimen/_20sdp" />
+
 
 </FrameLayout>

@@ -1,6 +1,5 @@
 package ace.infosolutions.tournyapp.ui.fragment;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -17,17 +16,20 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.IOException;
 
 import ace.infosolutions.tournyapp.R;
 import ace.infosolutions.tournyapp.databinding.FragmentProfileBinding;
+import ace.infosolutions.tournyapp.model.ProfileModel;
 import ace.infosolutions.tournyapp.ui.activity.AuthActivity;
 import ace.infosolutions.tournyapp.utils.CustomDialog;
+import ace.infosolutions.tournyapp.viewmodel.ProfileDataViewModel;
 
 
 public class ProfileFragment extends Fragment {
@@ -37,24 +39,15 @@ public class ProfileFragment extends Fragment {
     FirebaseAuth auth = FirebaseAuth.getInstance();
     Bitmap bitmap;
     Uri filePath;
-    // ProfileViewModel viewModel;
 
-    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    ProfileDataViewModel viewModel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         binding = FragmentProfileBinding.inflate(inflater, container, false);
         setUpFragmentToolbar(binding.getRoot());
-        initViewModel();
         return binding.getRoot();
-    }
-
-    private void initViewModel() {
-
-        // viewModel = new ViewModelProvider(requireActivity()).get(ProfileViewModel.class);
-
     }
 
     @Override
@@ -88,7 +81,7 @@ public class ProfileFragment extends Fragment {
         binding.edituname.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialog dialog = new CustomDialog(getContext(), 1);
+                CustomDialog dialog = new CustomDialog(getContext(), 1, getViewLifecycleOwner(), viewModel);
                 dialog.show();
             }
         });
@@ -96,8 +89,8 @@ public class ProfileFragment extends Fragment {
         binding.editpersprofile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                CustomDialog dialog = new CustomDialog(getContext(), 2);
-                dialog.show();
+              /*  CustomDialog dialog = new CustomDialog(getContext(), 2,getViewLifecycleOwner(),viewModel);
+                dialog.show();*/
             }
         });
         binding.settings.setOnClickListener(new View.OnClickListener() {
@@ -106,32 +99,16 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.action_profileFragment_to_settingsFragment);
             }
         });
+
     }
 
 
     private void UploadImage() {
         try {
             if (filePath != null) {
-                Log.e(TAG, "Filepath after upload click: " + filePath);
-                final ProgressDialog progressDialog
-                        = new ProgressDialog(getContext());
-                progressDialog.setTitle("Uploading...");
-                progressDialog.show();
-
-              /*  viewModel.init2(filePath);
-                viewModel.getUploadStatus().observe(getViewLifecycleOwner(), new Observer<Boolean>() {
-                    @Override
-                    public void onChanged(Boolean isuploaded) {
-                        if(isuploaded){
-                            progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Uploaded", Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            progressDialog.dismiss();
-                            Toast.makeText(getContext(), "Failed to upload", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });*/
+                viewModel.changeProfilePicture(filePath);
+                binding.uploadprofilepic.setVisibility(View.GONE);
+                binding.editprofilepic.setVisibility(View.VISIBLE);
             }
         } catch (Exception e) {
             Log.e(TAG, "UploadImage: " + e.getMessage());
@@ -180,28 +157,32 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-     /*   viewModel.getProfileData().observe(getViewLifecycleOwner(), new Observer<ProfileModel>() {
+
+        viewModel = new ViewModelProvider(requireActivity()).get(ProfileDataViewModel.class);
+        viewModel.getProfileData().observe(getViewLifecycleOwner(), new Observer<ProfileModel>() {
             @Override
             public void onChanged(ProfileModel profileModel) {
-                if (profileModel.isSuccess()) {
-                    Log.d(TAG, "onChanged: Success" + profileModel.getUsername());
-                    binding.username.setText(profileModel.getUsername());
-                    binding.fullName.setText(profileModel.getFull_name());
-                    binding.dob.setText(profileModel.getDob());
-                    binding.location.setText(profileModel.getLocation());
-                    binding.freefireId.setText(profileModel.getFreefire_id());
-                    binding.valorantId.setText(profileModel.getValorant_id());
-                    binding.codmobileId.setText(profileModel.getCodmobile_id());
-                    binding.pubgId.setText(profileModel.getPubg_id());
-                    binding.twitterId.setText(profileModel.getTwitter_id());
-                    binding.discordId.setText(profileModel.getDiscord_id());
-                    binding.facebookId.setText(profileModel.getFacebook_id());
-                    binding.whatsappId.setText(profileModel.getWhatsapp_id());
-                } else {
-                    Log.d(TAG, "onChanged:Failed ");
-                }
+                binding.username.setText(profileModel.getUsername());
+                binding.fullName.setText(profileModel.getFull_name());
+                binding.dob.setText(profileModel.getDob());
+                binding.location.setText(profileModel.getLocation());
+                binding.freefireId.setText(profileModel.getFreefire_id());
+                binding.valorantId.setText(profileModel.getValorant_id());
+                binding.codmobileId.setText(profileModel.getCodmobile_id());
+                binding.pubgId.setText(profileModel.getPubg_id());
+                binding.twitterId.setText(profileModel.getTwitter_id());
+                binding.discordId.setText(profileModel.getDiscord_id());
+                binding.facebookId.setText(profileModel.getFacebook_id());
+                binding.whatsappId.setText(profileModel.getWhatsapp_id());
             }
-        });*/
+        });
+
+        viewModel.getProfilePic().observe(getViewLifecycleOwner(), new Observer<Bitmap>() {
+            @Override
+            public void onChanged(Bitmap bitmap) {
+                binding.circleImageView.setImageBitmap(bitmap);
+            }
+        });
     }
 
     private void setUpDummyTeams(View view) {
@@ -237,6 +218,7 @@ public class ProfileFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
 }
 
 

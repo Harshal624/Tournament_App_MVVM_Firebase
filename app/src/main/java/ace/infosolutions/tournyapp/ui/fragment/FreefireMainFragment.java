@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -21,13 +20,26 @@ import ace.infosolutions.tournyapp.ui.adapter.PagerAdapter;
 
 public class FreefireMainFragment extends Fragment {
     FragmentFreefiremainBinding binding;
+
+
+    private final OnBackPressedCallback onBackPressedCallback = new OnBackPressedCallback(true) {
+        @Override
+        public void handleOnBackPressed() {
+            if (isEnabled() && binding.tablayout.getSelectedTabPosition() == 0) {
+                setEnabled(false);
+                requireActivity().onBackPressed();
+            } else {
+                setEnabled(false);
+                binding.viewpager.setCurrentItem(0);
+            }
+        }
+    };
     PagerAdapter pagerAdapter;
 
     private void setUpFragmentToolbar(View view) {
         TextView toolbar_title = view.findViewById(R.id.toolbar_title);
         toolbar_title.setText("Freefire");
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -36,12 +48,6 @@ public class FreefireMainFragment extends Fragment {
         setUpFragmentToolbar(binding.getRoot());
         pagerAdapter = new PagerAdapter(getActivity().getSupportFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, binding.tablayout.getTabCount());
         binding.viewpager.setAdapter(pagerAdapter);
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
         binding.tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
@@ -59,9 +65,8 @@ public class FreefireMainFragment extends Fragment {
             }
         });
         binding.viewpager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(binding.tablayout));
-
+        return binding.getRoot();
     }
-
 
     @Override
     public void onDestroyView() {
@@ -74,20 +79,6 @@ public class FreefireMainFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         //Handling onbackpressed in tab layout
-        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-
-                if (isEnabled() && binding.tablayout.getSelectedTabPosition() == 0) {
-                    setEnabled(false);
-                    requireActivity().onBackPressed();
-                } else {
-                    setEnabled(false);
-                    binding.viewpager.setCurrentItem(0);
-
-                }
-
-            }
-        });
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, onBackPressedCallback);
     }
 }

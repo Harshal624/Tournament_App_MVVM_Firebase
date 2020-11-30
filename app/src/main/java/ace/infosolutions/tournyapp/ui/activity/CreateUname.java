@@ -11,7 +11,6 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import ace.infosolutions.tournyapp.databinding.ActivityCreateUnameBinding;
 import ace.infosolutions.tournyapp.viewmodel.CreateUserNameViewModel;
@@ -19,10 +18,7 @@ import ace.infosolutions.tournyapp.viewmodel.CreateUserNameViewModel;
 public class CreateUname extends AppCompatActivity {
     ActivityCreateUnameBinding binding;
     EditText username;
-   // CreateUnameViewModel viewModel;
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth auth = FirebaseAuth.getInstance();
-  //  CreateUnameViewModel2 viewModel2;
     CreateUserNameViewModel viewModel;
 
     @Override
@@ -60,67 +56,12 @@ public class CreateUname extends AppCompatActivity {
                                                 finishAffinity();
                                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                                             }
-                                            else{
-                                                //failed
-                                            }
                                         }
                                     });
                                 }
                             }
                         });
-                     /*   viewModel2.init1(uName);
-                        viewModel2.getUNameExists().observe(CreateUname.this, new Observer<Boolean>() {
-                            @Override
-                            public void onChanged(Boolean status) {
-                                if(status == true){
-                                    username.setError("Username is already taken");
-                                }
-                                else{
-                                    Log.e("REACHABLE","YS");
-                                    viewModel2.init2(uName);
-                                    viewModel2.getUNameAdded().observe(CreateUname.this, new Observer<Boolean>() {
-                                        @Override
-                                        public void onChanged(Boolean bool) {
-                                            if(bool){
-                                                Toast.makeText(CreateUname.this, "Username successfully added", Toast.LENGTH_SHORT).show();
-                                                finishAffinity();
-                                                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                            }
-                                            else{
-                                               Log.e("FAILED","FAILED");
-                                            }
-                                        }
-                                    });
-                                }
-                            }
-                        });*/
-                    /*    db.collection(USERNAMES).document(uName).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                                if (task.isSuccessful()) {
-                                    if (task.getResult().exists()) {
-                                        username.setError("Username is already taken");
-                                    } else {
-                                        viewModel.init(uName);
-                                        viewModel.getStatus().observe(CreateUname.this, new Observer<Boolean>() {
-                                            @Override
-                                            public void onChanged(Boolean status) {
-                                                if (status) {
-                                                    //successfully added
-                                                    Toast.makeText(CreateUname.this, "Username successfully added", Toast.LENGTH_SHORT).show();
-                                                    finishAffinity();
-                                                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                                                }
-                                                else{
-                                                    Toast.makeText(CreateUname.this, "Failed to add", Toast.LENGTH_SHORT).show();
-                                                }
-                                            }
-                                        });
 
-                                    }
-                                }
-                            }
-                        });*/
                     }
 
                 }
@@ -137,8 +78,6 @@ public class CreateUname extends AppCompatActivity {
     }
 
     private void initViewModel() {
-       // viewModel = new ViewModelProvider(this).get(CreateUnameViewModel.class);
-      //  viewModel2 = new ViewModelProvider(this).get(CreateUnameViewModel2.class);
         viewModel = new ViewModelProvider(this).get(CreateUserNameViewModel.class);
     }
 }

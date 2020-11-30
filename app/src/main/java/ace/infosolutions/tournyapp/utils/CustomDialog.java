@@ -8,17 +8,26 @@ import android.view.Window;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
 
 import ace.infosolutions.tournyapp.databinding.ProfileAlertdialogBinding;
+import ace.infosolutions.tournyapp.model.ProfileModel;
+import ace.infosolutions.tournyapp.viewmodel.ProfileDataViewModel;
 
 public class CustomDialog extends Dialog {
     ProfileAlertdialogBinding binding;
     private int type;
-    private String string1, string2, string3;
+    private static final String TAG = "CustomDialog";
+    ProfileDataViewModel viewModel;
+    LifecycleOwner lifecycleOwner;
+    ProfileModel model;
 
-    public CustomDialog(@NonNull Context context, int type) {
+    public CustomDialog(@NonNull Context context, int type, LifecycleOwner lifecycleOwner, ProfileDataViewModel viewModel) {
         super(context);
         this.type = type;
+        this.lifecycleOwner = lifecycleOwner;
+        this.viewModel = viewModel;
     }
 
 
@@ -28,6 +37,13 @@ public class CustomDialog extends Dialog {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         binding = ProfileAlertdialogBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        viewModel.getProfileData().observe(lifecycleOwner, new Observer<ProfileModel>() {
+            @Override
+            public void onChanged(ProfileModel profileModel) {
+                model = profileModel;
+            }
+        });
 
         switch (type) {
             case 1:
@@ -54,37 +70,35 @@ public class CustomDialog extends Dialog {
     }
 
     private void verifyET() {
-        if (type == 2) {
-            if (isEmpty(binding.firstET) && isEmpty(binding.secondET) && isEmpty(binding.thirdET)) {
-                binding.firstET.setError("Empty");
-                binding.secondET.setError("Empty");
-                binding.thirdET.setError("Empty");
-            } else {
-                dismiss();
-            }
+        if (isEmpty(binding.firstET)) {
+            binding.firstET.setError("Empty");
         } else {
-            if (isEmpty(binding.firstET)) {
-                binding.firstET.setError("Empty");
-            } else {
-                dismiss();
+            switch (type) {
+                case 1:
+                    viewModel.changeUserName(binding.firstET.getText().toString().trim()).observe(lifecycleOwner, new Observer<Boolean>() {
+                        @Override
+                        public void onChanged(Boolean status) {
+                            if (status) {
+                                dismiss();
+                            } else {
+                                binding.firstET.setError("Username already exists");
+                            }
+                        }
+                    });
+
+                    break;
             }
         }
     }
 
     private void setUpPersonalInfoDialog() {
         binding.title.setText("Edit Personal Info");
-        binding.secondET.setVisibility(View.VISIBLE);
-        binding.thirdET.setVisibility(View.VISIBLE);
-        binding.firstET.setHint("Enter full name");
-        binding.secondET.setHint("Enter DOB");
-        binding.thirdET.setHint("Enter location");
+        binding.firstET.setHint(model.getDiscord_id());
     }
 
     private void setUpUsernameDialog() {
-        binding.title.setText("Edit Username");
-        binding.secondET.setVisibility(View.GONE);
-        binding.thirdET.setVisibility(View.GONE);
-        binding.firstET.setHint("Enter username");
+        binding.title.setText("Enter your new username");
+        binding.firstET.setHint(model.getUsername());
     }
 
     private boolean isEmpty(EditText editText) {

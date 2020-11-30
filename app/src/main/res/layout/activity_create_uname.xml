@@ -4,39 +4,51 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/maincolor"
     tools:context=".ui.activity.CreateUname">
+
 
     <EditText
         android:id="@+id/enter_username"
         android:layout_width="0dp"
-        app:layout_constraintWidth_percent="0.7"
-        app:layout_constraintWidth_default="percent"
         android:layout_height="wrap_content"
         android:hint="Enter username"
-        android:maxLines="1"
         android:inputType="textPersonName"
         android:maxLength="20"
-        app:layout_constraintBottom_toTopOf="@+id/createuname"
+        android:maxLines="1"
+        android:textColor="@color/white100"
+        android:textColorHint="@color/azure"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.349"
+        app:layout_constraintWidth_default="percent"
+        app:layout_constraintWidth_percent="0.7" />
 
     <Button
         android:id="@+id/createuname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_30sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:text="Create username"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="@dimen/_30sdp"
+        android:background="@drawable/custom_button"
+        android:fontFamily="@font/verminvibesfont"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/enter_username" />
 
     <ImageButton
         android:id="@+id/logout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="@dimen/_5sdp"
-        android:background="@color/maincolor"
-        android:src="@drawable/logout"
         android:layout_margin="@dimen/_20sdp"
+        android:background="@color/maincolor"
+        android:padding="@dimen/_5sdp"
+        android:src="@drawable/logout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
